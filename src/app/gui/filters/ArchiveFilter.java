@@ -12,7 +12,7 @@ public class ArchiveFilter extends FileFilter {
 
 	@Override
 	public boolean accept(File f) {
-		return ARCHIVE_EXTENSIONS.contains(FileUtils.getExtension(f));
+		return f.isDirectory() || ARCHIVE_EXTENSIONS.contains(FileUtils.getExtension(f));
 	}
 
 	@Override
