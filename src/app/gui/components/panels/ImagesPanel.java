@@ -4,7 +4,6 @@ import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle;
@@ -52,16 +51,5 @@ public class ImagesPanel extends JPanel {
 			.addContainerGap(12, 12)
 		);
 	}
-
-	public JButton getBrowseImagesButton() {
-		return browseImagesButton;
-	}
-
-	public JList getImagesList() {
-		return ((ImageListScrollPane) imageListScrollPane).getImagesList();
-	}
 	
-	public void clearAllFields() {
-		getImagesList().setListData(new Object[0]);
-	}
 }

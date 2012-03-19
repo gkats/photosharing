@@ -14,17 +14,18 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.BevelBorder;
 
-import com.google.common.eventbus.Subscribe;
-
 import app.gui.components.buttons.BrowseArchiveButton;
 import app.gui.components.text.CompressCheckBox;
 import app.gui.events.ArchiveSelectedEvent;
 import app.gui.events.ClearFieldsEvent;
 import app.gui.events.CompressImagesEvent;
 import app.gui.events.EventBusService;
+import app.gui.events.ImagesCompressedEvent;
 import app.log.Logger;
 import app.log.Severity;
 import app.util.FileUtils;
+
+import com.google.common.eventbus.Subscribe;
 
 public class CompressPanel extends JPanel {
 
@@ -36,7 +37,7 @@ public class CompressPanel extends JPanel {
 	private JButton browseArchiveButton;
 	
 	public CompressPanel() {
-		GroupLayout compressPanelLayout = new GroupLayout((JComponent)this);
+		GroupLayout compressPanelLayout = new GroupLayout((JComponent) this);
 		setLayout(compressPanelLayout);
 		setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
 		
@@ -107,10 +108,13 @@ public class CompressPanel extends JPanel {
 	@Subscribe
 	public void compressImages(CompressImagesEvent e) {
 		String archiveName = archiveNameTextField.getText();
+		if (!"".equals(archiveName) && !archiveName.endsWith(".zip")) {
+			archiveName += ".zip";
+		}
 		try {
 			FileUtils.zipFiles(archiveName, e.getImages().toArray(new File[0]));
 			Logger.INSTANCE.log(Severity.INFO, "Created archive " + archiveName);
-			EventBusService.getEventBus().post(new ClearFieldsEvent());
+			EventBusService.getEventBus().post(new ImagesCompressedEvent());
 		} catch (IOException ioe) {
 			Logger.INSTANCE.log(Severity.ERROR, "Could not create archive.");
 		}
@@ -121,16 +125,4 @@ public class CompressPanel extends JPanel {
 		archiveNameTextField.setText("");
 	}
 	
-	public JTextField getArchiveNameTextField() {
-		return archiveNameTextField;
-	}
-	
-	public JButton getBrowseArchiveButton() {
-		return browseArchiveButton;
-	}
-	
-	public void clearAllFields() {
-		((CompressCheckBox) compressCheckBox).clear();
-		archiveNameTextField.setText("");
-	}
 }

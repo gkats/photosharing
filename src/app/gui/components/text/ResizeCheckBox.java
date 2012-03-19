@@ -45,22 +45,13 @@ public class ResizeCheckBox extends JCheckBox {
 		setSelected(false);
 	}
 	
-	public boolean getResize() {
-		return resize;
-	}
-	
 	public class ResizeCheckBoxItemListener implements ItemListener {
 
 		public void itemStateChanged(ItemEvent e) {
-			if (e.getItemSelectable() == this) {
+			if (e.getItemSelectable() instanceof ResizeCheckBox) {
 				resize = (e.getStateChange() == ItemEvent.SELECTED);
 			}
 		}
-	}
-	
-	public void clear() {
-		resize = false;
-		setSelected(false);
 	}
 	
 }

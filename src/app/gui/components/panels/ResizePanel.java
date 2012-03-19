@@ -55,30 +55,57 @@ public class ResizePanel extends JPanel {
 		.addGroup(resizePanelLayout.createParallelGroup()
 		    .addGroup(resizePanelLayout.createSequentialGroup()
 		        .addGroup(resizePanelLayout.createParallelGroup()
-		            .addComponent(widthLabel, GroupLayout.Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-		            .addGroup(GroupLayout.Alignment.LEADING, resizePanelLayout.createSequentialGroup()
-		                .addComponent(heightLabel, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
-		                .addGap(7)))
+		            .addComponent(widthLabel, GroupLayout.Alignment.LEADING, 
+		            		GroupLayout.PREFERRED_SIZE, 55, 
+		            		GroupLayout.PREFERRED_SIZE)
+		            .addGroup(GroupLayout.Alignment.LEADING, 
+		            		resizePanelLayout.createSequentialGroup()
+		                .addComponent(heightLabel, GroupLayout.PREFERRED_SIZE, 
+		                		48, GroupLayout.PREFERRED_SIZE)
+		                .addGap(7)
+		            )
+		        )
 		        .addGroup(resizePanelLayout.createParallelGroup()
 		            .addGroup(resizePanelLayout.createSequentialGroup()
-		                .addComponent(heightTextField, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+		                .addComponent(heightTextField, GroupLayout.PREFERRED_SIZE, 
+		                		49, GroupLayout.PREFERRED_SIZE)
 		                .addGap(0, 0, Short.MAX_VALUE))
-		            .addComponent(widthTextField, GroupLayout.Alignment.LEADING, 0, 49, Short.MAX_VALUE)))
-		    .addGroup(GroupLayout.Alignment.LEADING, resizePanelLayout.createSequentialGroup()
-		        .addComponent(resizeCheckBox, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-		        .addGap(0, 30, Short.MAX_VALUE)))
-		.addContainerGap(20, 20));
+		            .addComponent(widthTextField, GroupLayout.Alignment.LEADING, 
+		            		0, 49, Short.MAX_VALUE)
+		         )
+		    )
+		    .addGroup(GroupLayout.Alignment.LEADING, 
+		    		resizePanelLayout.createSequentialGroup()
+		        .addComponent(resizeCheckBox, GroupLayout.PREFERRED_SIZE, 
+		        		74, GroupLayout.PREFERRED_SIZE)
+		        .addGap(0, 30, Short.MAX_VALUE)
+		    )
+		)
+		.addContainerGap(20, 20)
+	);
 	resizePanelLayout.setVerticalGroup(resizePanelLayout.createSequentialGroup()
 		.addContainerGap()
-		.addComponent(resizeCheckBox, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-		.addGroup(resizePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-		    .addComponent(widthTextField, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
-		    .addComponent(widthLabel, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
+		.addComponent(resizeCheckBox, GroupLayout.PREFERRED_SIZE, 
+				GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE)
+		.addGroup(
+			resizePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+		    .addComponent(widthTextField, GroupLayout.Alignment.BASELINE, 
+		    		GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, 
+		    		GroupLayout.PREFERRED_SIZE)
+		    .addComponent(widthLabel, GroupLayout.Alignment.BASELINE, 
+		    		GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, 
+		    		GroupLayout.PREFERRED_SIZE)
+		)
 		.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-		.addGroup(resizePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-		    .addComponent(heightTextField, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-		    .addComponent(heightLabel, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
-		.addContainerGap(17, 17));
+		.addGroup(
+			resizePanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+		    .addComponent(heightTextField, GroupLayout.Alignment.BASELINE, 
+		    		GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+		    .addComponent(heightLabel, GroupLayout.Alignment.BASELINE, 
+		    		GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, 
+		    		GroupLayout.PREFERRED_SIZE))
+		    .addContainerGap(17, 17)
+		);
 	}
 	
 	@Subscribe
@@ -89,6 +116,8 @@ public class ResizePanel extends JPanel {
 				int width = Integer.parseInt(widthTextField.getText());
 				int height = Integer.parseInt(heightTextField.getText());
 				resizer.resize(image, width, height);
+				EventBusService.getEventBus().post(
+						new ImagesResizedEvent(e.getImages()));
 			} catch (NumberFormatException nfe) {
 				Logger.INSTANCE.log(Severity.ERROR, 
 						"Invalid width/height value.");
@@ -100,7 +129,6 @@ public class ResizePanel extends JPanel {
 		}
 		Logger.INSTANCE.log(Severity.INFO, "Resized " 
 				+ resizer.getResizedImages() + " images.");
-		EventBusService.getEventBus().post(new ImagesResizedEvent(e.getImages()));
 	}
 	
 	@Subscribe
@@ -109,21 +137,4 @@ public class ResizePanel extends JPanel {
 		heightTextField.setText("");
 	}
 	
-	public boolean getResize() {
-		return ((ResizeCheckBox) resizeCheckBox).getResize();
-	}
-	
-	public String getWidthValue() {
-		return widthTextField.getText();
-	}
-	
-	public String getHeightValue() {
-		return heightTextField.getText();
-	}
-	
-	public void clearAllFields() {
-		((ResizeCheckBox) resizeCheckBox).clear(); 
-		widthTextField.setText("");
-		heightTextField.setText("");
-	}
 }

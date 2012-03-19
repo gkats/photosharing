@@ -44,10 +44,6 @@ public class CompressCheckBox extends JCheckBox {
 		setSelected(false);
 	}
 	
-	public boolean getCompress() {
-		return compress;
-	}
-	
 	public class CompressCheckBoxItemListener implements ItemListener {
 		public void itemStateChanged(ItemEvent e) {
 			if (e.getItemSelectable() instanceof CompressCheckBox) {
@@ -56,8 +52,4 @@ public class CompressCheckBox extends JCheckBox {
 		}
 	}
 	
-	public void clear() {
-		compress = false;
-		setSelected(false);
-	}
 }

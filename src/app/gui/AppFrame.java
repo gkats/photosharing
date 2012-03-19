@@ -9,12 +9,17 @@ import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
+import com.google.common.eventbus.Subscribe;
+
 import app.gui.components.buttons.GoButton;
 import app.gui.components.menu.MenuBar;
 import app.gui.components.panels.ImagesPanel;
 import app.gui.components.panels.ManipulationPanel;
 import app.gui.components.panels.OutputPanel;
 import app.gui.components.panels.SharePanel;
+import app.gui.events.ClearFieldsEvent;
+import app.gui.events.EventBusService;
+import app.gui.events.ImagesCompressedEvent;
 
 public class AppFrame extends JFrame {
 
@@ -44,6 +49,13 @@ public class AppFrame extends JFrame {
 
 		setContent(appFrameLayout);
 		pack();
+		
+		EventBusService.getEventBus().register(this);
+	}
+	
+	@Subscribe
+	public void finalOperation(ImagesCompressedEvent e) {
+		EventBusService.getEventBus().post(new ClearFieldsEvent());
 	}
 	
 	private void setContent(GroupLayout appFrameLayout) {

@@ -2,10 +2,8 @@ package app.gui.components.panels;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 
 public class ManipulationPanel extends JPanel {
@@ -53,32 +51,4 @@ public class ManipulationPanel extends JPanel {
 		);
 	}
 	
-	public boolean getResize() {
-		return ((ResizePanel) resizePanel).getResize();
-	}
-	
-	public String getWidthValue() {
-		return getResizePanel().getWidthValue();
-	}
-	
-	public String getHeightValue() {
-		return getResizePanel().getHeightValue();
-	}
-	
-	public JButton getBrowseArchiveButton() {
-		return getCompressPanel().getBrowseArchiveButton();
-	}
-	
-	private ResizePanel getResizePanel() {
-		return (ResizePanel) resizePanel;
-	}
-	
-	private CompressPanel getCompressPanel() {
-		return (CompressPanel) compressPanel;
-	}
-	
-	public void clearAllFields() {
-		getResizePanel().clearAllFields();
-		getCompressPanel().clearAllFields();
-	}
 }

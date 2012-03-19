@@ -26,12 +26,18 @@ public class OutputPanel extends JPanel {
 	}
 
 	private void setContent(GroupLayout outputPanelLayout) {
-		outputPanelLayout.setVerticalGroup(outputPanelLayout.createSequentialGroup()
-				.addComponent(outputScrollPane, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-				.addContainerGap(12, 12));
-		outputPanelLayout.setHorizontalGroup(outputPanelLayout.createSequentialGroup()
+		outputPanelLayout.setVerticalGroup(
+			outputPanelLayout.createSequentialGroup()
+			.addComponent(outputScrollPane, GroupLayout.PREFERRED_SIZE, 
+					52, GroupLayout.PREFERRED_SIZE)
 			.addContainerGap(12, 12)
-			.addComponent(outputScrollPane, GroupLayout.PREFERRED_SIZE, 608, GroupLayout.PREFERRED_SIZE)
-			.addContainerGap(12, 12));
+		);
+		outputPanelLayout.setHorizontalGroup(
+			outputPanelLayout.createSequentialGroup()
+			.addContainerGap(12, 12)
+			.addComponent(outputScrollPane, GroupLayout.PREFERRED_SIZE, 
+					608, GroupLayout.PREFERRED_SIZE)
+			.addContainerGap(12, 12)
+		);
 	}
 }

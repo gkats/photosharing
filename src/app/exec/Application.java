@@ -12,6 +12,7 @@ public class Application {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
+				@SuppressWarnings("unused")
 				JFileChooser fileChooser = FileChooserFactory.getFileChooser();
 				AppFrame appFrame = new AppFrame();
 				appFrame.setLocationRelativeTo(null);

@@ -15,7 +15,7 @@ import app.gui.events.ListImagesEvent;
 import app.images.ImageLister;
 import app.log.Logger;
 import app.log.Severity;
-import app.util.ListUtils;
+import app.util.CollectionUtils;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -33,13 +33,14 @@ public class ImageListScrollPane extends JScrollPane {
 	
 	@Subscribe
 	public void selectImages(ImagesSelectedEvent e) {
-		imagesList.setListData(e.getSelectedImages());
+		imagesList.setListData(CollectionUtils.extendModel(imagesList.getModel(), 
+				e.getSelectedImages(), File.class));
 	}
 	
 	@Subscribe
 	public void listImages(ListImagesEvent e) {
 		List<File> locations 
-			= ListUtils.asList(imagesList.getModel(), File.class);
+			= CollectionUtils.asList(imagesList.getModel(), File.class);
 		ImageLister lister = new ImageLister();
 		List<File> images = lister.listImages(locations);
 		Logger.INSTANCE.log(Severity.INFO, "Found " 
@@ -53,7 +54,4 @@ public class ImageListScrollPane extends JScrollPane {
 		imagesList.setListData(new Object[0]);
 	}
 	
-	public JList getImagesList() {
-		return imagesList;
-	}
 }
