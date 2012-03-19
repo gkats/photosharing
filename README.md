@@ -1,6 +1,9 @@
 EMPTY FILE
 
 TODOs:
-- clean up gui class
-- file upload
-- send upload link email
+- Add dropbox support
+- Add email support
+- Display console output in UI
+- Use DI
+- Fix menu/help
+
