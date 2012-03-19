@@ -1,0 +1,5 @@
+- Use EventBus
+- Add dropbox support
+- Add email support
+- Display console output in UI
+- Use DI

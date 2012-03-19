@@ -1,5 +1,8 @@
 package app.gui.components.panels;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JCheckBox;
@@ -11,6 +14,15 @@ import javax.swing.LayoutStyle;
 import javax.swing.border.BevelBorder;
 
 import app.gui.components.text.ResizeCheckBox;
+import app.gui.events.ClearFieldsEvent;
+import app.gui.events.EventBusService;
+import app.gui.events.ImagesResizedEvent;
+import app.gui.events.ResizeImagesEvent;
+import app.images.ImageResizer;
+import app.log.Logger;
+import app.log.Severity;
+
+import com.google.common.eventbus.Subscribe;
 
 public class ResizePanel extends JPanel {
 
@@ -24,6 +36,7 @@ public class ResizePanel extends JPanel {
 	
 	public ResizePanel() {
 		initGUI();
+		EventBusService.getEventBus().register(this);
 	}
 
 	private void initGUI() {
@@ -66,6 +79,34 @@ public class ResizePanel extends JPanel {
 		    .addComponent(heightTextField, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
 		    .addComponent(heightLabel, GroupLayout.Alignment.BASELINE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE, GroupLayout.PREFERRED_SIZE))
 		.addContainerGap(17, 17));
+	}
+	
+	@Subscribe
+	public void resizeImages(ResizeImagesEvent e) {
+		ImageResizer resizer = new ImageResizer();
+		for (File image : e.getImages()) {
+			try {
+				int width = Integer.parseInt(widthTextField.getText());
+				int height = Integer.parseInt(heightTextField.getText());
+				resizer.resize(image, width, height);
+			} catch (NumberFormatException nfe) {
+				Logger.INSTANCE.log(Severity.ERROR, 
+						"Invalid width/height value.");
+				return;
+			} catch (IOException ioe) {
+				Logger.INSTANCE.log(Severity.ERROR, 
+						"Could not resize file: " + image.getAbsolutePath());
+			}
+		}
+		Logger.INSTANCE.log(Severity.INFO, "Resized " 
+				+ resizer.getResizedImages() + " images.");
+		EventBusService.getEventBus().post(new ImagesResizedEvent(e.getImages()));
+	}
+	
+	@Subscribe
+	public void clearFields(ClearFieldsEvent e) {
+		widthTextField.setText("");
+		heightTextField.setText("");
 	}
 	
 	public boolean getResize() {

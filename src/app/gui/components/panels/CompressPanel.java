@@ -1,5 +1,8 @@
 package app.gui.components.panels;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -11,8 +14,17 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.BevelBorder;
 
+import com.google.common.eventbus.Subscribe;
+
 import app.gui.components.buttons.BrowseArchiveButton;
 import app.gui.components.text.CompressCheckBox;
+import app.gui.events.ArchiveSelectedEvent;
+import app.gui.events.ClearFieldsEvent;
+import app.gui.events.CompressImagesEvent;
+import app.gui.events.EventBusService;
+import app.log.Logger;
+import app.log.Severity;
+import app.util.FileUtils;
 
 public class CompressPanel extends JPanel {
 
@@ -34,6 +46,8 @@ public class CompressPanel extends JPanel {
 		browseArchiveButton = new BrowseArchiveButton();
 		
 		setContent(compressPanelLayout);
+		
+		EventBusService.getEventBus().register(this);
 	}
 
 	private void setContent(GroupLayout compressPanelLayout) {
@@ -85,8 +99,26 @@ public class CompressPanel extends JPanel {
 		);
 	}
 	
-	public boolean getCompress() {
-		return ((CompressCheckBox) compressCheckBox).getCompress();
+	@Subscribe
+	public void selectArchive(ArchiveSelectedEvent e) {
+		archiveNameTextField.setText(e.getSelectedArchive().getAbsolutePath());
+	}
+	
+	@Subscribe
+	public void compressImages(CompressImagesEvent e) {
+		String archiveName = archiveNameTextField.getText();
+		try {
+			FileUtils.zipFiles(archiveName, e.getImages().toArray(new File[0]));
+			Logger.INSTANCE.log(Severity.INFO, "Created archive " + archiveName);
+			EventBusService.getEventBus().post(new ClearFieldsEvent());
+		} catch (IOException ioe) {
+			Logger.INSTANCE.log(Severity.ERROR, "Could not create archive.");
+		}
+	}
+	
+	@Subscribe
+	public void clearFields(ClearFieldsEvent e) {
+		archiveNameTextField.setText("");
 	}
 	
 	public JTextField getArchiveNameTextField() {

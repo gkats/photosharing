@@ -6,6 +6,8 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 
+import app.gui.actions.BrowseImagesAction;
+
 public class BrowseImagesButton extends JButton {
 
 	private static final long serialVersionUID = 7385981425944754285L;
@@ -19,5 +21,6 @@ public class BrowseImagesButton extends JButton {
 				browseImagesButtonLayout.createParallelGroup());
 		browseImagesButtonLayout.setHorizontalGroup(
 				browseImagesButtonLayout.createParallelGroup());
+		setAction(new BrowseImagesAction());
 	}
 }

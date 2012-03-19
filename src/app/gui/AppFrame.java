@@ -9,9 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
-import app.gui.actions.BrowseArchiveAction;
-import app.gui.actions.BrowseImagesAction;
-import app.gui.actions.GoAction;
 import app.gui.components.buttons.GoButton;
 import app.gui.components.menu.MenuBar;
 import app.gui.components.panels.ImagesPanel;
@@ -47,20 +44,6 @@ public class AppFrame extends JFrame {
 
 		setContent(appFrameLayout);
 		pack();
-	
-		getImagesPanel().getBrowseImagesButton().setAction(
-			new BrowseImagesAction(this, getImagesPanel().getImagesList())
-		);
-		
-		getManipulationPanel().getBrowseArchiveButton()
-			.setAction(
-				new BrowseArchiveAction(
-					this, 
-					getManipulationPanel().getArchiveNameTextField()
-				)
-		);
-		
-		goButton.setAction(new GoAction(getImagesPanel(), getManipulationPanel()));
 	}
 	
 	private void setContent(GroupLayout appFrameLayout) {
@@ -116,11 +99,4 @@ public class AppFrame extends JFrame {
 		);
 	}
 	
-	public ImagesPanel getImagesPanel() {
-		return (ImagesPanel) imagesPanel;
-	}
-
-	public ManipulationPanel getManipulationPanel() {
-		return (ManipulationPanel) manipulationPanel;
-	}
 }

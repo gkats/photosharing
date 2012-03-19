@@ -65,14 +65,6 @@ public class ManipulationPanel extends JPanel {
 		return getResizePanel().getHeightValue();
 	}
 	
-	public boolean getCompress() {
-		return getCompressPanel().getCompress();
-	}
-	
-	public JTextField getArchiveNameTextField() {
-		return getCompressPanel().getArchiveNameTextField();
-	}
-	
 	public JButton getBrowseArchiveButton() {
 		return getCompressPanel().getBrowseArchiveButton();
 	}

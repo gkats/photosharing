@@ -6,6 +6,14 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JCheckBox;
 
+import app.gui.events.ClearFieldsEvent;
+import app.gui.events.EventBusService;
+import app.gui.events.ImagesListedEvent;
+import app.gui.events.ImagesResizedEvent;
+import app.gui.events.ResizeImagesEvent;
+
+import com.google.common.eventbus.Subscribe;
+
 public class ResizeCheckBox extends JCheckBox {
 
 	private static final long serialVersionUID = 7548908287463406291L;
@@ -16,6 +24,25 @@ public class ResizeCheckBox extends JCheckBox {
 		setMnemonic(KeyEvent.VK_R);
 		setText("Resize?");
 		addItemListener(new ResizeCheckBoxItemListener());
+		EventBusService.getEventBus().register(this);
+	}
+	
+	@Subscribe
+	public void imagesListed(ImagesListedEvent e) {
+		if (resize) {
+			EventBusService.getEventBus().post(
+					new ResizeImagesEvent(e.getImages()));
+		}
+		else {
+			EventBusService.getEventBus().post(
+					new ImagesResizedEvent(e.getImages()));
+		}
+	}
+	
+	@Subscribe
+	public void clearFields(ClearFieldsEvent e) {
+		resize = false;
+		setSelected(false);
 	}
 	
 	public boolean getResize() {

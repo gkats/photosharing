@@ -10,7 +10,7 @@ public class FileChooserFactory {
 	
 	public static JFileChooser getFileChooser() {
 		if (fileChooser == null) {
-			fileChooser = new JFileChooser();
+			fileChooser = new FileChooser();
 		}
 		return fileChooser;
 	}

@@ -4,6 +4,8 @@ import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 
+import app.gui.actions.GoAction;
+
 public class GoButton extends JButton {
 
 	private static final long serialVersionUID = 4456573222798840911L;
@@ -13,9 +15,10 @@ public class GoButton extends JButton {
 		setLayout(null);
 		setText("Go");
 		setSize(103, 34);
-//		setAction(new GoAction());
 		goButtonLayout.setHorizontalGroup(goButtonLayout.createParallelGroup());
 		goButtonLayout.setVerticalGroup(goButtonLayout.createParallelGroup());
+		
+		setAction(new GoAction());
 	} 
 
 }
