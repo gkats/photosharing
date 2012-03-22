@@ -10,6 +10,10 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.BevelBorder;
 
+import app.gui.events.ClearFieldsEvent;
+
+import com.google.common.eventbus.Subscribe;
+
 public class UploadPanel extends JPanel {
 
 	private static final long serialVersionUID = -3730443987974875475L;
@@ -19,6 +23,8 @@ public class UploadPanel extends JPanel {
 	private JTextField userNameTextField;
 	private JLabel passwordLabel;
 	private JPasswordField passwordField;
+	private JLabel linkLabel;
+	private JTextField linkTextField;
 	
 	public UploadPanel() {
 		GroupLayout uploadPanelLayout = new GroupLayout((JComponent) this);
@@ -30,10 +36,20 @@ public class UploadPanel extends JPanel {
 		passwordLabel = new JLabel("Password:");
 		userNameTextField = new JTextField();
 		passwordField = new JPasswordField();
+		linkLabel = new JLabel("Link:");
+		linkTextField = new JTextField();
+		linkTextField.setEditable(false);
 		
 		setContent(uploadPanelLayout);
 	}
 
+	@Subscribe
+	public void clearFields(ClearFieldsEvent e) {
+		userNameTextField.setText("");
+		passwordField.setText("");
+		linkTextField.setText("");
+	}
+	
 	private void setContent(GroupLayout uploadPanelLayout) {
 		uploadPanelLayout.setHorizontalGroup(
 			uploadPanelLayout.createSequentialGroup()
@@ -56,16 +72,31 @@ public class UploadPanel extends JPanel {
 			    			195, GroupLayout.PREFERRED_SIZE)
 			        .addGap(0, 153, Short.MAX_VALUE)
 			    )
-			    .addComponent(titleLabel, GroupLayout.Alignment.LEADING, 
-			    	0, 763, Short.MAX_VALUE)
-			)
+			.addGroup(GroupLayout.Alignment.LEADING, 
+		    		uploadPanelLayout.createSequentialGroup()
+			    .addComponent(titleLabel, GroupLayout.PREFERRED_SIZE, 
+			    	195, GroupLayout.PREFERRED_SIZE)
+			    .addGap(121)
+			    .addComponent(linkLabel, GroupLayout.PREFERRED_SIZE, 
+			    	64, GroupLayout.PREFERRED_SIZE)
+			    .addGap(7)
+			    .addComponent(linkTextField, GroupLayout.PREFERRED_SIZE, 
+			    	315, GroupLayout.PREFERRED_SIZE)
+			))
 		    .addContainerGap()
 		);
 		uploadPanelLayout.setVerticalGroup(
 			uploadPanelLayout.createSequentialGroup()
 			.addContainerGap()
-			.addComponent(titleLabel, GroupLayout.PREFERRED_SIZE, 
-				16, GroupLayout.PREFERRED_SIZE)
+			.addGroup(
+				uploadPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+				.addComponent(titleLabel, GroupLayout.PREFERRED_SIZE, 
+						16, GroupLayout.PREFERRED_SIZE)
+				.addComponent(linkLabel, GroupLayout.PREFERRED_SIZE, 
+						GroupLayout.PREFERRED_SIZE,	GroupLayout.PREFERRED_SIZE)
+				.addComponent(linkTextField, GroupLayout.PREFERRED_SIZE, 
+						GroupLayout.PREFERRED_SIZE,	GroupLayout.PREFERRED_SIZE)
+			)
 			.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
 			.addGroup(
 				uploadPanelLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)

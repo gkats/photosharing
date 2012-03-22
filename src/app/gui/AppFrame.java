@@ -10,8 +10,8 @@ import javax.swing.WindowConstants;
 import app.gui.components.menu.MenuBar;
 import app.gui.components.scrolling.AppPanelScrollPane;
 import app.gui.events.ClearFieldsEvent;
+import app.gui.events.EmailSentEvent;
 import app.gui.events.EventBusService;
-import app.gui.events.ImagesCompressedEvent;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -35,12 +35,14 @@ public class AppFrame extends JFrame {
 
 		setContent(appFrameLayout);
 		pack();
+		setResizable(false);
+		setTitle("Photosharing");
 		
 		EventBusService.getEventBus().register(this);
 	}
 	
 	@Subscribe
-	public void finalOperation(ImagesCompressedEvent e) {
+	public void finalOperation(EmailSentEvent e) {
 		EventBusService.getEventBus().post(new ClearFieldsEvent());
 	}
 	

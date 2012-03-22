@@ -1,5 +1,4 @@
 package app.exec;
-import javax.swing.JFileChooser;
 import javax.swing.SwingUtilities;
 
 import app.gui.AppFrame;
@@ -12,8 +11,7 @@ public class Application {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				@SuppressWarnings("unused")
-				JFileChooser fileChooser = FileChooserFactory.getFileChooser();
+				FileChooserFactory.getFileChooser();
 				AppFrame appFrame = new AppFrame();
 				appFrame.setLocationRelativeTo(null);
 				appFrame.setVisible(true);
