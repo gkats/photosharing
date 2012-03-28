@@ -21,6 +21,6 @@ public class BrowseImagesButton extends JButton {
 				browseImagesButtonLayout.createParallelGroup());
 		browseImagesButtonLayout.setHorizontalGroup(
 				browseImagesButtonLayout.createParallelGroup());
-		setAction(new BrowseImagesAction());
+		setAction(new BrowseImagesAction(getText(), getMnemonic()));
 	}
 }

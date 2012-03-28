@@ -11,8 +11,9 @@ public class BrowseImagesAction extends AbstractAction {
 
 	private static final long serialVersionUID = 4650219830823343728L;
 
-	public BrowseImagesAction() {
-		super("Add", null);
+	public BrowseImagesAction(String text, Integer mnemonic) {
+		super(text, null);
+		putValue(MNEMONIC_KEY, mnemonic);
 	}
 	
 	@Override

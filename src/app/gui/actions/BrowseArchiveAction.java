@@ -11,8 +11,9 @@ public class BrowseArchiveAction extends AbstractAction {
 
 	private static final long serialVersionUID = -525367833144538755L;
 
-	public BrowseArchiveAction() {
-		super("Browse", null);
+	public BrowseArchiveAction(String text, Integer mnemonic) {
+		super(text, null);
+		putValue(MNEMONIC_KEY, mnemonic);
 	}
 	
 	@Override

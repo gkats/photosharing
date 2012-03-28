@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle;
 
 import app.gui.components.buttons.BrowseImagesButton;
+import app.gui.components.buttons.ClearImagesListButton;
 import app.gui.components.scrolling.ImageListScrollPane;
 
 public class ImagesPanel extends JPanel {
@@ -17,6 +18,7 @@ public class ImagesPanel extends JPanel {
 	
 	private JButton browseImagesButton;
 	private JScrollPane imageListScrollPane;
+	private JButton clearImagesListButton;
 	
 	public ImagesPanel() {
 		GroupLayout imagesPanelLayout = new GroupLayout((JComponent) this);
@@ -24,14 +26,20 @@ public class ImagesPanel extends JPanel {
 		setBorder(BorderFactory.createTitledBorder("Add files/folders"));
 		imageListScrollPane = new ImageListScrollPane();
 		browseImagesButton = new BrowseImagesButton();
+		clearImagesListButton = new ClearImagesListButton();
 		
 		imagesPanelLayout.setVerticalGroup(
 			imagesPanelLayout.createSequentialGroup()
 			.addComponent(imageListScrollPane, GroupLayout.PREFERRED_SIZE, 
 				71, GroupLayout.PREFERRED_SIZE)
     		.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-    		.addComponent(browseImagesButton, GroupLayout.PREFERRED_SIZE, 
-    			GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+    		.addGroup(
+    			imagesPanelLayout.createParallelGroup()
+				.addComponent(browseImagesButton, GroupLayout.PREFERRED_SIZE, 
+        			GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        		.addComponent(clearImagesListButton, GroupLayout.PREFERRED_SIZE, 
+        			GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+    		)
     		.addContainerGap(11, 11)
     	);
 		
@@ -39,10 +47,15 @@ public class ImagesPanel extends JPanel {
 			imagesPanelLayout.createSequentialGroup()
 			.addContainerGap(12, 12)
 			.addGroup(imagesPanelLayout.createParallelGroup()
-			    .addComponent(browseImagesButton, 
-			    		GroupLayout.Alignment.LEADING, 
+			    .addGroup(imagesPanelLayout.createSequentialGroup()
+					.addComponent(browseImagesButton, 
 			    		GroupLayout.PREFERRED_SIZE, 95, 
 			    		GroupLayout.PREFERRED_SIZE)
+			    	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+    	    		.addComponent(clearImagesListButton, 
+    			    		GroupLayout.PREFERRED_SIZE, 95, 
+    			    		GroupLayout.PREFERRED_SIZE)
+			    )
 			    .addComponent(imageListScrollPane, 
 			    		GroupLayout.Alignment.LEADING, 
 			    		GroupLayout.PREFERRED_SIZE, 734, 

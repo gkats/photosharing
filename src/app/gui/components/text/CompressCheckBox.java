@@ -8,9 +8,9 @@ import javax.swing.JCheckBox;
 
 import app.gui.events.ClearFieldsEvent;
 import app.gui.events.CompressImagesEvent;
-import app.gui.events.CreateMessageEvent;
 import app.gui.events.EventBusService;
 import app.gui.events.ImagesResizedEvent;
+import app.gui.events.UploadImagesEvent;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -34,7 +34,7 @@ public class CompressCheckBox extends JCheckBox {
 					new CompressImagesEvent(e.getImages()));
 		}
 		else {
-			EventBusService.getEventBus().post(new CreateMessageEvent());
+			EventBusService.getEventBus().post(new UploadImagesEvent());
 		}
 	}
 	

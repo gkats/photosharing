@@ -30,7 +30,6 @@ import app.mail.Mailer;
 import app.mail.configuration.GmailConfiguration;
 import app.mail.configuration.HotmailConfiguration;
 import app.mail.configuration.MailerConfiguration;
-import app.mail.configuration.YahooMailConfiguration;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -84,8 +83,9 @@ public class MailPanel extends JPanel {
 		}
 		Message msg = new MimeMessage(configuration.getSession());
 		try {
-			msg.setText(subjectTextField.getText());
+			msg.setSubject(subjectTextField.getText());
 			msg.setFrom(new InternetAddress(userNameTextField.getText()));
+			msg.setText(e.getText());
 			EventBusService.getEventBus().post(new FillMessageRecipientsEvent(msg));
 		}
 		catch (MessagingException me) {
@@ -129,9 +129,6 @@ public class MailPanel extends JPanel {
 		}
 		else if ("Hotmail".equals(provider)) {
 			return HotmailConfiguration.configureSession(username, password);
-		}
-		else if ("Yahoo! Mail".equals(provider)) {
-			return YahooMailConfiguration.configureSession(username, password);
 		}
 		return null;
 	}

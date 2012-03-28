@@ -1,5 +1,7 @@
 package app.gui.components.buttons;
 
+import java.awt.event.KeyEvent;
+
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -15,10 +17,11 @@ public class GoButton extends JButton {
 		setLayout(null);
 		setText("Go");
 		setSize(103, 34);
+		setMnemonic(KeyEvent.VK_G);
 		goButtonLayout.setHorizontalGroup(goButtonLayout.createParallelGroup());
 		goButtonLayout.setVerticalGroup(goButtonLayout.createParallelGroup());
 		
-		setAction(new GoAction());
+		setAction(new GoAction(getText(), getMnemonic()));
 	} 
 
 }

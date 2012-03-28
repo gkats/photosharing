@@ -2,6 +2,7 @@ package app.exec;
 import javax.swing.SwingUtilities;
 
 import app.gui.AppFrame;
+import app.gui.HelpFrame;
 import app.gui.components.filechooser.FileChooserFactory;
 
 public class Application {
@@ -15,6 +16,9 @@ public class Application {
 				AppFrame appFrame = new AppFrame();
 				appFrame.setLocationRelativeTo(null);
 				appFrame.setVisible(true);
+				HelpFrame helpFrame = new HelpFrame();
+				helpFrame.setLocationRelativeTo(appFrame);
+				helpFrame.setVisible(false);
 			}
 		});
 	}

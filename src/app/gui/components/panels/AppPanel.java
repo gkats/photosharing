@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 
 import app.gui.components.buttons.GoButton;
+import app.gui.components.buttons.ResetButton;
 
 public class AppPanel extends JPanel {
 
@@ -17,6 +18,7 @@ public class AppPanel extends JPanel {
 	private JPanel sharePanel;
 	private JPanel outputPanel;
 	private JButton goButton;
+	private JButton resetButton;
 	
 	public AppPanel() {
 		GroupLayout appPanelLayout = new GroupLayout((JComponent) this);
@@ -27,6 +29,7 @@ public class AppPanel extends JPanel {
     	sharePanel = new SharePanel();
     	outputPanel = new OutputPanel();
     	goButton = new GoButton();
+    	resetButton = new ResetButton();
     	
     	setContent(appPanelLayout);
 	}
@@ -53,6 +56,9 @@ public class AppPanel extends JPanel {
 			        .addGap(0, 26, Short.MAX_VALUE)
 			        .addComponent(goButton, GroupLayout.PREFERRED_SIZE, 34, 
 			        	GroupLayout.PREFERRED_SIZE)
+			        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+			        .addComponent(resetButton, GroupLayout.PREFERRED_SIZE, 24, 
+			        	GroupLayout.PREFERRED_SIZE)
 			        .addGap(28)
 			    )
 			)
@@ -69,8 +75,12 @@ public class AppPanel extends JPanel {
 			        .addComponent(outputPanel, GroupLayout.PREFERRED_SIZE, 642, 
 			        	GroupLayout.PREFERRED_SIZE)
 			        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-			        .addComponent(goButton, GroupLayout.PREFERRED_SIZE, 103, 
-			        	GroupLayout.PREFERRED_SIZE)
+			        .addGroup(appPanelLayout.createParallelGroup()
+    			        .addComponent(goButton, GroupLayout.PREFERRED_SIZE, 103, 
+    			        	GroupLayout.PREFERRED_SIZE)
+    			        .addComponent(resetButton, GroupLayout.PREFERRED_SIZE, 103, 
+    			        	GroupLayout.PREFERRED_SIZE)
+			        )
 			        .addGap(0, 11, Short.MAX_VALUE)
 			    )
 			    .addComponent(imagesPanel, GroupLayout.Alignment.LEADING, 0, 

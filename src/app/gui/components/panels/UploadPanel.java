@@ -11,6 +11,9 @@ import javax.swing.LayoutStyle;
 import javax.swing.border.BevelBorder;
 
 import app.gui.events.ClearFieldsEvent;
+import app.gui.events.CreateMessageEvent;
+import app.gui.events.EventBusService;
+import app.gui.events.UploadImagesEvent;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -41,8 +44,17 @@ public class UploadPanel extends JPanel {
 		linkTextField.setEditable(false);
 		
 		setContent(uploadPanelLayout);
+		EventBusService.getEventBus().register(this);
 	}
 
+	@Subscribe
+	public void upload(UploadImagesEvent e) {
+		// TODO upload to dropbox and get link
+		String link = "this is the download link";
+		linkTextField.setText(link);
+		EventBusService.getEventBus().post(new CreateMessageEvent(link));
+	}
+	
 	@Subscribe
 	public void clearFields(ClearFieldsEvent e) {
 		userNameTextField.setText("");

@@ -8,7 +8,7 @@ public class MailAccountComboBox extends JComboBox {
 	private static final long serialVersionUID = -7693536641105599062L;
 
 	private final static String[] MAIL_PROVIDERS 
-		= new String[] { "Gmail", "Hotmail", "Yahoo! Mail" };
+		= new String[] { "Gmail", "Hotmail" };
 	
 	public MailAccountComboBox() {
 		setModel(new DefaultComboBoxModel(MAIL_PROVIDERS));

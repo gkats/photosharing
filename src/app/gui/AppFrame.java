@@ -36,7 +36,7 @@ public class AppFrame extends JFrame {
 		setContent(appFrameLayout);
 		pack();
 		setResizable(false);
-		setTitle("Photosharing");
+		setTitle("PhotoSharing");
 		
 		EventBusService.getEventBus().register(this);
 	}

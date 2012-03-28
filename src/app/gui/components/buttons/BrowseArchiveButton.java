@@ -21,6 +21,6 @@ public class BrowseArchiveButton extends JButton {
 				browseArchiveButtonLayout.createParallelGroup());
 		browseArchiveButtonLayout.setHorizontalGroup(
 				browseArchiveButtonLayout.createParallelGroup());
-		setAction(new BrowseArchiveAction());
+		setAction(new BrowseArchiveAction(getText(), getMnemonic()));
 	}
 }
