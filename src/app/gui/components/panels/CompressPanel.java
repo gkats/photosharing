@@ -94,11 +94,17 @@ public class CompressPanel extends JPanel {
 			        	178, GroupLayout.PREFERRED_SIZE)
 			        .addGap(268)
 			    )
-			    .addComponent(archiveNameTextField, GroupLayout.Alignment.LEADING, 
-			    	GroupLayout.PREFERRED_SIZE, 446, GroupLayout.PREFERRED_SIZE)
+			    .addGroup(GroupLayout.Alignment.LEADING, 
+			    	compressPanelLayout.createSequentialGroup()
+			    	.addComponent(archiveNameTextField, 
+			    		GroupLayout.PREFERRED_SIZE, 446, 
+			    		GroupLayout.PREFERRED_SIZE)
+			    	.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+			    	.addComponent(browseArchiveButton, 
+			    		GroupLayout.PREFERRED_SIZE, 
+        			GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+			    )
 			)
-			.addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-			.addComponent(browseArchiveButton, 0, 104, Short.MAX_VALUE)
 			.addContainerGap()
 		);
 	}

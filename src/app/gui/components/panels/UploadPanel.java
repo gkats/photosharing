@@ -72,14 +72,12 @@ public class UploadPanel extends JPanel {
 			    	GroupLayout.Alignment.LEADING, 
 			    		uploadPanelLayout.createSequentialGroup()
 			    		.addComponent(userNameLabel, GroupLayout.PREFERRED_SIZE, 
-			    			64, GroupLayout.PREFERRED_SIZE)
-			    		.addGap(7)
+			    			94, GroupLayout.PREFERRED_SIZE)
 			    		.addComponent(userNameTextField, GroupLayout.PREFERRED_SIZE, 
 			    			195, GroupLayout.PREFERRED_SIZE)
-			    		.addGap(50)
+			    		.addGap(27)
 			    		.addComponent(passwordLabel, GroupLayout.PREFERRED_SIZE, 
-			    			64, GroupLayout.PREFERRED_SIZE)
-			    		.addGap(7)
+			    			94, GroupLayout.PREFERRED_SIZE)
 			    		.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 
 			    			195, GroupLayout.PREFERRED_SIZE)
 			        .addGap(0, 153, Short.MAX_VALUE)
@@ -87,11 +85,11 @@ public class UploadPanel extends JPanel {
 			.addGroup(GroupLayout.Alignment.LEADING, 
 		    		uploadPanelLayout.createSequentialGroup()
 			    .addComponent(titleLabel, GroupLayout.PREFERRED_SIZE, 
-			    	195, GroupLayout.PREFERRED_SIZE)
-			    .addGap(121)
+			    	245, GroupLayout.PREFERRED_SIZE)
+			    .addGap(71)
 			    .addComponent(linkLabel, GroupLayout.PREFERRED_SIZE, 
 			    	64, GroupLayout.PREFERRED_SIZE)
-			    .addGap(7)
+			    .addGap(29)
 			    .addComponent(linkTextField, GroupLayout.PREFERRED_SIZE, 
 			    	315, GroupLayout.PREFERRED_SIZE)
 			))

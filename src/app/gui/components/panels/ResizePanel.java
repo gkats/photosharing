@@ -63,7 +63,7 @@ public class ResizePanel extends JPanel {
 		            .addGroup(GroupLayout.Alignment.LEADING, 
 		            		resizePanelLayout.createSequentialGroup()
 		                .addComponent(heightLabel, GroupLayout.PREFERRED_SIZE, 
-		                		48, GroupLayout.PREFERRED_SIZE)
+		                		55, GroupLayout.PREFERRED_SIZE)
 		                .addGap(7)
 		            )
 		        )
@@ -79,7 +79,7 @@ public class ResizePanel extends JPanel {
 		    .addGroup(GroupLayout.Alignment.LEADING, 
 		    		resizePanelLayout.createSequentialGroup()
 		        .addComponent(resizeCheckBox, GroupLayout.PREFERRED_SIZE, 
-		        		74, GroupLayout.PREFERRED_SIZE)
+		        		84, GroupLayout.PREFERRED_SIZE)
 		        .addGap(0, 30, Short.MAX_VALUE)
 		    )
 		)

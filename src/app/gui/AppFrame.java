@@ -27,7 +27,7 @@ public class AppFrame extends JFrame {
 		GroupLayout appFrameLayout 
 			= new GroupLayout((JComponent) getContentPane());
 		getContentPane().setLayout(appFrameLayout);
-		setSize(810, 610);
+		setSize(800, 600);
 		setResizable(false);
 		setTitle("PhotoSharing");
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

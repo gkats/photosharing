@@ -226,11 +226,11 @@ public class MailPanel extends JPanel {
 				        	mailPanelLayout.createParallelGroup()
 				            .addComponent(userNameLabel, 
 				            	GroupLayout.Alignment.LEADING, 
-				            	GroupLayout.PREFERRED_SIZE, 66, 
+				            	GroupLayout.PREFERRED_SIZE, 86, 
 				            	GroupLayout.PREFERRED_SIZE)
 				            .addComponent(passwordLabel, 
 				            	GroupLayout.Alignment.LEADING, 
-				            	GroupLayout.PREFERRED_SIZE, 66, 
+				            	GroupLayout.PREFERRED_SIZE, 86, 
 				            	GroupLayout.PREFERRED_SIZE)
 				         )
 				        .addGroup(
@@ -247,7 +247,7 @@ public class MailPanel extends JPanel {
 				    )
 				    .addComponent(accountLabelPartOne, 
 				    	GroupLayout.Alignment.LEADING, 
-				    	GroupLayout.PREFERRED_SIZE, 113, 
+				    	GroupLayout.PREFERRED_SIZE, 153, 
 				    	GroupLayout.PREFERRED_SIZE)
 				    .addGroup(
 				    	mailPanelLayout.createSequentialGroup()
@@ -274,11 +274,11 @@ public class MailPanel extends JPanel {
 					mailPanelLayout.createParallelGroup()
 				    .addComponent(subjectTextField, 
 				    	GroupLayout.Alignment.LEADING, 
-				    	GroupLayout.PREFERRED_SIZE, 362, 
+				    	GroupLayout.PREFERRED_SIZE, 342, 
 				    	GroupLayout.PREFERRED_SIZE)
 				    .addComponent(recipientsScrollPane, 
 				    	GroupLayout.Alignment.LEADING, 
-				    	GroupLayout.PREFERRED_SIZE, 362, 
+				    	GroupLayout.PREFERRED_SIZE, 342, 
 				    	GroupLayout.PREFERRED_SIZE)
 				)
 				.addContainerGap(12, 12)
