@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.BevelBorder;
 
-import app.gui.components.text.ResizeCheckBox;
+import app.di.annotations.Resize;
 import app.gui.events.ClearFieldsEvent;
 import app.gui.events.EventBusService;
 import app.gui.events.ImagesResizedEvent;
@@ -23,6 +23,7 @@ import app.log.Logger;
 import app.log.Severity;
 
 import com.google.common.eventbus.Subscribe;
+import com.google.inject.Inject;
 
 public class ResizePanel extends JPanel {
 
@@ -34,7 +35,9 @@ public class ResizePanel extends JPanel {
 	private JTextField heightTextField;
 	private JTextField widthTextField;
 	
-	public ResizePanel() {
+	@Inject
+	public ResizePanel(@Resize JCheckBox resizeCheckBox) {
+		this.resizeCheckBox = resizeCheckBox;
 		initGUI();
 		EventBusService.getEventBus().register(this);
 	}
@@ -44,7 +47,6 @@ public class ResizePanel extends JPanel {
 		setLayout(resizePanelLayout);
 		setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
 		
-		resizeCheckBox = new ResizeCheckBox();
 		widthLabel = new JLabel("Width:");
 		widthTextField = new JTextField();
 		heightLabel = new JLabel("Height:");

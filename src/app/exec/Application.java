@@ -1,36 +1,44 @@
 package app.exec;
+import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import app.gui.AppFrame;
-import app.gui.HelpFrame;
+import app.di.annotations.App;
+import app.di.annotations.Help;
+import app.di.config.PhotoSharingModule;
 import app.gui.components.filechooser.FileChooserFactory;
+
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 public class Application {
 
 	private static final long serialVersionUID = 5407640954864628060L;
 
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				FileChooserFactory.getFileChooser();
-				AppFrame appFrame = new AppFrame();
-				appFrame.setLocationRelativeTo(null);
-				appFrame.setVisible(true);
-				HelpFrame helpFrame = new HelpFrame();
-				helpFrame.setLocationRelativeTo(appFrame);
-				helpFrame.setVisible(false);
-			}
-		});
+		Injector injector = Guice.createInjector(new PhotoSharingModule());
+		ApplicationThread app = injector.getInstance(ApplicationThread.class);
+		SwingUtilities.invokeLater(app);
 	}
 	
-//	public Application() {
-//		super();
-//		try {
-//			initGUI();
-//		}
-//		catch (Exception e) {
-//			Logger.INSTANCE.log(Severity.ERROR, e.getMessage());
-//		}
-//	}
-
+	public static class ApplicationThread implements Runnable {
+		
+		private JFrame appFrame;
+		private JFrame helpFrame;
+		
+		@Inject
+		public ApplicationThread(@App JFrame appFrame, @Help JFrame helpFrame) {
+			this.appFrame = appFrame;
+			this.helpFrame = helpFrame;
+		}
+		
+		public void run() {
+			FileChooserFactory.getFileChooser();
+			appFrame.setLocationRelativeTo(null);
+			appFrame.setVisible(true);
+			helpFrame.setLocationRelativeTo(appFrame);
+			helpFrame.setVisible(false);
+		}
+	}
+	
 }

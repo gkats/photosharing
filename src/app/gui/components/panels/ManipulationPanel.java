@@ -6,6 +6,11 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 
+import app.di.annotations.Compress;
+import app.di.annotations.Resize;
+
+import com.google.inject.Inject;
+
 public class ManipulationPanel extends JPanel {
 
 	private static final long serialVersionUID = -8246666744663868140L;
@@ -13,7 +18,12 @@ public class ManipulationPanel extends JPanel {
 	private JPanel resizePanel;
 	private JPanel compressPanel;
 	
-	public ManipulationPanel() {
+	@Inject
+	public ManipulationPanel(@Resize JPanel resizePanel, 
+			@Compress JPanel compressPanel) {
+		
+		this.resizePanel = resizePanel;
+		this.compressPanel = compressPanel;
 		initGUI();
 	}
 
@@ -23,9 +33,6 @@ public class ManipulationPanel extends JPanel {
 		setLayout(manipulationPanelLayout);
 		setBorder(BorderFactory.createTitledBorder("Resize and Compress"));
 		setSize(768, 133);
-		
-		resizePanel = new ResizePanel();
-		compressPanel = new CompressPanel();
 		
 		setContent(manipulationPanelLayout);
 	}

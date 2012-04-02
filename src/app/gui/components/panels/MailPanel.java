@@ -16,8 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.BevelBorder;
 
-import app.gui.components.scrolling.RecipientsScrollPane;
-import app.gui.components.text.MailAccountComboBox;
+import app.di.annotations.Mail;
 import app.gui.events.ClearFieldsEvent;
 import app.gui.events.CreateMessageEvent;
 import app.gui.events.EmailSentEvent;
@@ -32,6 +31,7 @@ import app.mail.configuration.HotmailConfiguration;
 import app.mail.configuration.MailerConfiguration;
 
 import com.google.common.eventbus.Subscribe;
+import com.google.inject.Inject;
 
 public class MailPanel extends JPanel {
 
@@ -51,20 +51,23 @@ public class MailPanel extends JPanel {
 	
 	private MailerConfiguration configuration;
 	
-	public MailPanel() {
+	@Inject
+	public MailPanel(@Mail JComboBox accountComboBox, 
+			@Mail JScrollPane recipientsScrollPane) {
+		
 		GroupLayout mailPanelLayout = new GroupLayout((JComponent) this);
 		setLayout(mailPanelLayout);
 		setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
 		
 		accountLabelPartOne = new JLabel("Send mail using my ");
-		accountComboBox = new MailAccountComboBox();
+		this.accountComboBox = accountComboBox;
 		accountLabelPartTwo = new JLabel(" account.");
 		userNameLabel = new JLabel("Username:");
 		passwordLabel = new JLabel("Password:");
 		userNameTextField = new JTextField();
 		passwordField = new JPasswordField();
 		recipientsLabel = new JLabel("Recipients:");
-		recipientsScrollPane = new RecipientsScrollPane();
+		this.recipientsScrollPane = recipientsScrollPane;
 		subjectLabel = new JLabel("Subject:");
 		subjectTextField = new JTextField();
 		

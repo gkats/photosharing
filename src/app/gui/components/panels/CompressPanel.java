@@ -14,8 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.border.BevelBorder;
 
-import app.gui.components.buttons.BrowseArchiveButton;
-import app.gui.components.text.CompressCheckBox;
+import app.di.annotations.Compress;
 import app.gui.events.ArchiveSelectedEvent;
 import app.gui.events.ClearFieldsEvent;
 import app.gui.events.CompressImagesEvent;
@@ -26,6 +25,7 @@ import app.log.Severity;
 import app.util.FileUtils;
 
 import com.google.common.eventbus.Subscribe;
+import com.google.inject.Inject;
 
 public class CompressPanel extends JPanel {
 
@@ -36,15 +36,18 @@ public class CompressPanel extends JPanel {
 	private JTextField archiveNameTextField;
 	private JButton browseArchiveButton;
 	
-	public CompressPanel() {
+	@Inject
+	public CompressPanel(@Compress JCheckBox compressCheckBox, 
+			@Compress JButton browseArchiveButton) {
+		
 		GroupLayout compressPanelLayout = new GroupLayout((JComponent) this);
 		setLayout(compressPanelLayout);
 		setBorder(BorderFactory.createEtchedBorder(BevelBorder.LOWERED));
 		
-		compressCheckBox = new CompressCheckBox();
+		this.compressCheckBox = compressCheckBox;
 		archiveNameLabel = new JLabel("Archive filename:");
 		archiveNameTextField = new JTextField();
-		browseArchiveButton = new BrowseArchiveButton();
+		this.browseArchiveButton = browseArchiveButton;
 		
 		setContent(compressPanelLayout);
 		

@@ -2,9 +2,7 @@ package app.gui.components.buttons;
 
 import java.awt.event.KeyEvent;
 
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
 import app.gui.actions.BrowseArchiveAction;
 
@@ -15,12 +13,6 @@ public class BrowseArchiveButton extends JButton {
 	public BrowseArchiveButton() {
 		setText("Browse");
 		setMnemonic(KeyEvent.VK_B);
-		GroupLayout browseArchiveButtonLayout 
-			= new GroupLayout((JComponent) this);
-		browseArchiveButtonLayout.setVerticalGroup(
-				browseArchiveButtonLayout.createParallelGroup());
-		browseArchiveButtonLayout.setHorizontalGroup(
-				browseArchiveButtonLayout.createParallelGroup());
 		setAction(new BrowseArchiveAction(getText(), getMnemonic()));
 	}
 }

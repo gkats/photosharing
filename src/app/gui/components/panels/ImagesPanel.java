@@ -8,25 +8,23 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle;
 
-import app.gui.components.buttons.BrowseImagesButton;
-import app.gui.components.buttons.ClearImagesListButton;
-import app.gui.components.scrolling.ImageListScrollPane;
+import app.di.annotations.Images;
+
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 public class ImagesPanel extends JPanel {
 
 	private static final long serialVersionUID = 2363980182499948598L;
 	
-	private JButton browseImagesButton;
-	private JScrollPane imageListScrollPane;
-	private JButton clearImagesListButton;
-	
-	public ImagesPanel() {
+	@Inject
+	public ImagesPanel(@Images JButton browseImagesButton, 
+			@Images JScrollPane imageListScrollPane, 
+			@Named("clearImagesList") JButton clearImagesListButton) {
+		
 		GroupLayout imagesPanelLayout = new GroupLayout((JComponent) this);
 		setLayout(imagesPanelLayout);
 		setBorder(BorderFactory.createTitledBorder("Add files/folders"));
-		imageListScrollPane = new ImageListScrollPane();
-		browseImagesButton = new BrowseImagesButton();
-		clearImagesListButton = new ClearImagesListButton();
 		
 		imagesPanelLayout.setVerticalGroup(
 			imagesPanelLayout.createSequentialGroup()

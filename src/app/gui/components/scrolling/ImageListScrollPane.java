@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 
-import app.gui.components.text.ImagesList;
+import app.di.annotations.Images;
 import app.gui.events.ClearFieldsEvent;
 import app.gui.events.EventBusService;
 import app.gui.events.ImagesListedEvent;
@@ -18,6 +18,7 @@ import app.log.Severity;
 import app.util.CollectionUtils;
 
 import com.google.common.eventbus.Subscribe;
+import com.google.inject.Inject;
 
 public class ImageListScrollPane extends JScrollPane {
 
@@ -25,8 +26,10 @@ public class ImageListScrollPane extends JScrollPane {
 	
 	private JList imagesList;
 	
-	public ImageListScrollPane() {
-		imagesList = new ImagesList();
+	@Inject
+	public ImageListScrollPane(@Images JList imagesList) {
+		this.imagesList = imagesList;
+		
 		setViewportView(imagesList);
 		EventBusService.getEventBus().register(this);
 	}

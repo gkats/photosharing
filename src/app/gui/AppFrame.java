@@ -7,36 +7,34 @@ import javax.swing.JMenuBar;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
-import app.gui.components.menu.MenuBar;
-import app.gui.components.scrolling.AppPanelScrollPane;
+import app.di.annotations.App;
 import app.gui.events.ClearFieldsEvent;
 import app.gui.events.EmailSentEvent;
 import app.gui.events.EventBusService;
 
 import com.google.common.eventbus.Subscribe;
+import com.google.inject.Inject;
 
 public class AppFrame extends JFrame {
 
 	private static final long serialVersionUID = -7180367288739459084L;
 	
-	private JMenuBar menuBar;
 	private JScrollPane appPanelScrollPane;
 	
-	public AppFrame() {
+	@Inject
+	public AppFrame(JMenuBar menuBar, @App JScrollPane appPanelScrollPane) {
+		this.appPanelScrollPane = appPanelScrollPane;
 		GroupLayout appFrameLayout 
 			= new GroupLayout((JComponent) getContentPane());
 		getContentPane().setLayout(appFrameLayout);
 		setSize(810, 610);
+		setResizable(false);
+		setTitle("PhotoSharing");
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		
-		menuBar = new MenuBar();
 		setJMenuBar(menuBar);
-		appPanelScrollPane = new AppPanelScrollPane();
 
 		setContent(appFrameLayout);
 		pack();
-		setResizable(false);
-		setTitle("PhotoSharing");
 		
 		EventBusService.getEventBus().register(this);
 	}

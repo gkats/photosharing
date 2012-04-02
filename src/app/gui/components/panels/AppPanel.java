@@ -6,8 +6,14 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 
-import app.gui.components.buttons.GoButton;
-import app.gui.components.buttons.ResetButton;
+import app.di.annotations.Go;
+import app.di.annotations.Images;
+import app.di.annotations.Manipulation;
+import app.di.annotations.Output;
+import app.di.annotations.Reset;
+import app.di.annotations.Share;
+
+import com.google.inject.Inject;
 
 public class AppPanel extends JPanel {
 
@@ -20,17 +26,21 @@ public class AppPanel extends JPanel {
 	private JButton goButton;
 	private JButton resetButton;
 	
-	public AppPanel() {
+	@Inject
+	public AppPanel(@Images JPanel imagesPanel, @Manipulation JPanel manipulationPanel,
+			@Share JPanel sharePanel, @Output JPanel outputPanel, @Go JButton goButton,
+			@Reset JButton resetButton) {
+		
+		this.imagesPanel = imagesPanel;
+		this.manipulationPanel = manipulationPanel;
+		this.sharePanel = sharePanel;
+		this.outputPanel = outputPanel;
+		this.goButton = goButton;
+		this.resetButton = resetButton;
+		
 		GroupLayout appPanelLayout = new GroupLayout((JComponent) this);
 		setLayout(appPanelLayout);
 		
-    	imagesPanel = new ImagesPanel();
-    	manipulationPanel = new ManipulationPanel();
-    	sharePanel = new SharePanel();
-    	outputPanel = new OutputPanel();
-    	goButton = new GoButton();
-    	resetButton = new ResetButton();
-    	
     	setContent(appPanelLayout);
 	}
 

@@ -7,7 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
-import app.gui.components.scrolling.OutputScrollPane;
+import app.di.annotations.Output;
+
+import com.google.inject.Inject;
 
 public class OutputPanel extends JPanel {
 
@@ -15,13 +17,14 @@ public class OutputPanel extends JPanel {
 
 	private JScrollPane outputScrollPane;
 	
-	public OutputPanel() {
+	@Inject
+	public OutputPanel(@Output JScrollPane outputScrollPane) {
 		GroupLayout outputPanelLayout = new GroupLayout((JComponent) this);
 		setLayout(outputPanelLayout);
 		setBorder(BorderFactory.createTitledBorder(null, 
 				"Output", TitledBorder.LEADING, TitledBorder.TOP));
 		
-		outputScrollPane = new OutputScrollPane();
+		this.outputScrollPane = outputScrollPane;
 		setContent(outputPanelLayout);
 	}
 
@@ -29,7 +32,7 @@ public class OutputPanel extends JPanel {
 		outputPanelLayout.setVerticalGroup(
 			outputPanelLayout.createSequentialGroup()
 			.addComponent(outputScrollPane, GroupLayout.PREFERRED_SIZE, 
-					52, GroupLayout.PREFERRED_SIZE)
+					82, GroupLayout.PREFERRED_SIZE)
 			.addContainerGap(12, 12)
 		);
 		outputPanelLayout.setHorizontalGroup(

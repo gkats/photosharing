@@ -6,6 +6,11 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 
+import app.di.annotations.Mail;
+import app.di.annotations.Upload;
+
+import com.google.inject.Inject;
+
 public class SharePanel extends JPanel {
 
 	private static final long serialVersionUID = -7532452903844152513L;
@@ -13,14 +18,15 @@ public class SharePanel extends JPanel {
 	private JPanel uploadPanel;
 	private JPanel mailPanel;
 
-	public SharePanel() {
+	@Inject
+	public SharePanel(@Upload JPanel uploadPanel, @Mail JPanel mailPanel) {
 		GroupLayout sharePanelLayout = new GroupLayout((JComponent) this);
 		setLayout(sharePanelLayout);
 		setSize(768, 491);
 		setBorder(BorderFactory.createTitledBorder("Upload and Share"));
 		
-		uploadPanel = new UploadPanel();
-		mailPanel = new MailPanel();
+		this.uploadPanel = uploadPanel;
+		this.mailPanel = mailPanel;
 		
 		setContent(sharePanelLayout);
 	}
