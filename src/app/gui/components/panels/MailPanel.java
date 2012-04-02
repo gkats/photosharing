@@ -107,12 +107,15 @@ public class MailPanel extends JPanel {
 		mailer.setMessage(e.getMessage());
 		try {
 			mailer.sendMail(userNameTextField.getText(), 
-					passwordField.getPassword().toString());
+					String.valueOf((passwordField.getPassword())));
 			EventBusService.getEventBus().post(new EmailSentEvent());
 		}
 		catch (MessagingException me) {
 			Logger.INSTANCE.log(Severity.ERROR, 
 					"Error sending email message.");
+		}
+		finally {
+			passwordField.setText("");
 		}
 	}
 	
