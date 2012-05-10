@@ -13,8 +13,6 @@ import com.google.inject.Injector;
 
 public class Application {
 
-	private static final long serialVersionUID = 5407640954864628060L;
-
 	public static void main(String[] args) {
 		Injector injector = Guice.createInjector(new PhotoSharingModule());
 		ApplicationThread app = injector.getInstance(ApplicationThread.class);
